@@ -9,9 +9,39 @@ Created on Tue Oct 15 11:37:50 2024
 # import packages
 import pandas as pd
 import geopandas as gpd
+import os
 
 
 ##### Import and clean excel files
+ 
+def find_repo_root(start_path):
+    current_path = os.path.abspath(start_path)
+   
+    while True:
+        # Check for the existence of the .git directory or other indicators
+        if os.path.isdir(os.path.join(current_path, '.git')) or \
+           os.path.isfile(os.path.join(current_path, 'README.md')):
+            return current_path
+       
+        parent_path = os.path.dirname(current_path)
+       
+        # Stop if we reach the root directory
+        if parent_path == current_path:
+            break
+       
+        current_path = parent_path
+ 
+    return None  # Return None if not found
+ 
+root = find_repo_root(os.getcwd())
+
+
+
+data_file_path = f"{root}/Data/County/county_to_county_migrations_table_2005_2009.xls"
+header_file_path = f"{root}/Data/County/header_corospondance.xlsx"
+shapefile_path = f"{root}/Data/Shapefiles/cb_2023_us_county_500k.shp"
+
+
 
 # Define the paths to your Excel files
 data_file_path = '/Users/carinamanitius/Documents/GitHub/climate_migration/Data/County/county_to_county_migrations_table_2005_2009.xls'
