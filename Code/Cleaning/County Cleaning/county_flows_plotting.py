@@ -11,6 +11,7 @@ import pandas as pd
 import geopandas as gpd
 import os
 import matplotlib.pyplot as plt
+import imageio
 
 
 ##### Get WD
@@ -86,9 +87,6 @@ for start_year, end_year in periods:
     
     summed_period_gdfs[f"{start_year}_{end_year}"] = merged_gdf
 
-
-
- 
  
  
 ######### PER CAPITA OUTFLOW
@@ -209,16 +207,23 @@ for period, merged_gdf in summed_period_gdfs.items():
     
 ######### GROSS NET
 
-# Find the global min and max values across all GeoDataFrames for the specified column
+# Find the global min and max values across all GeoDataFrames for 'net_thousands'
 all_values = []
 
 # Collect all values for the column you are interested in
 for merged_gdf in summed_period_gdfs.values():
     all_values.extend(merged_gdf['net_thousands'].dropna().tolist())
 
-# Calculate global min and max
+# Calculate global min and max to maintain consistent color scale
 global_min = min(all_values)
 global_max = max(all_values)
+
+# Directory to save the PNG files
+output_dir = f'{root}/Figures/County EDA/Color_coded_net/Gross/'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+png_files = []  # List to store the path to each PNG file
 
 # Loop through each GeoDataFrame in summed_period_gdfs and create a plot
 for period, merged_gdf in summed_period_gdfs.items():
@@ -228,15 +233,15 @@ for period, merged_gdf in summed_period_gdfs.items():
     # Set the figure size
     fig, ax = plt.subplots(figsize=(10, 5))  
 
-    # Plot the GeoDataFrame with fixed color scale
-    merged_gdf.plot(column='net_thousands',  # Choose the appropriate column to plot
-                     cmap='RdBu',  # Change this to a diverging colormap
-                     legend=True, 
-                     vmin=global_min,  # Set the same minimum for all plots
-                     vmax=global_max,  # Set the same maximum for all plots
-                     missing_kwds={'color': 'lightgrey', 'label': 'Missing Values'},
-                     edgecolor='none', 
-                     ax=ax)  
+    # Plot the GeoDataFrame with fixed color scale and the same min/max across all periods
+    merged_gdf.plot(column='net_thousands',  
+                    cmap='RdBu',  # Diverging colormap that emphasizes differences
+                    legend=True, 
+                    vmin=global_min,  # Set the same minimum for all plots
+                    vmax=global_max,  # Set the same maximum for all plots
+                    missing_kwds={'color': 'lightgrey', 'label': 'Missing Values'},
+                    edgecolor='none', 
+                    ax=ax)  
 
     # Remove the box and axis labels
     ax.set_axis_off()  # This removes the axis
@@ -244,7 +249,25 @@ for period, merged_gdf in summed_period_gdfs.items():
     # Add title with the specified format
     plt.title(f'Gross Net Migration, thousands {start_year} - {end_year}', fontsize=15)
 
-    plt.savefig(f'{root}/Figures/County EDA/Color_coded_net/Gross/gross_net_{start_year}_{end_year}.png')  # Uncomment to save as PNG files
+    # Filepath for the PNG
+    png_file = f'{output_dir}gross_net_{start_year}_{end_year}.png'
+    plt.savefig(png_file)
+    plt.close()  # Close the figure to save memory
+
+    png_files.append(png_file)  # Append the file to the list
+
+# Combine all PNGs into a GIF
+gif_output_path = f'{root}/Figures/County EDA/Color_coded_net/Gross/gross_net_migration.gif'
+
+# Create a GIF using imageio
+with imageio.get_writer(gif_output_path, mode='I', duration=10) as writer:  # duration=1 second per frame
+    for png_file in png_files:
+        image = imageio.imread(png_file)
+        writer.append_data(image)
+
+print(f"GIF created and saved at {gif_output_path}")
+
+
 
 
 ######### GROSS INFLOW
@@ -326,7 +349,6 @@ for period, merged_gdf in summed_period_gdfs.items():
     plt.title(f'Gross Outflow, thousands {start_year} - {end_year}', fontsize=15)
 
     plt.savefig(f'{root}/Figures/County EDA/Color_coded_outflow/Gross/gross_outflow_{start_year}_{end_year}.png')  # Uncomment to save as PNG files
-
 
 
 
