@@ -24,33 +24,47 @@ root = find_repo_root(os.getcwd())
 import pandas as pd
 
 # Load the data into a dataframe
-file_path = root+'Data\County\CMRA_Screening_Data.csv'
+file_path = root+'\Data\County\CMRA_Screening_Data.csv'
 df = pd.read_csv(file_path)
 
-#Drop columns containing 'RCP 8.5' in their name
-df = df.drop(df.columns[df.columns.str.contains('RCP 8.5')], axis=1)
-#removes all late century columns 
-df = df.drop(df.columns[df.columns.str.contains('Late-century')], axis=1)
-#Removes columns about annual number of days with recipitation greater than 1, 2, 3, and 4 inches
-df = df.drop(df.columns[df.columns.str.contains('Annual number of days with total precipitation')], axis=1)
-#not sure if we need these
-df = df.drop(df.columns[df.columns.str.contains('Daily minimum temperature')], axis=1)
-df = df.drop(df.columns[df.columns.str.contains('Daily maximum temperature')], axis=1)
-df = df.drop(df.columns[df.columns.str.contains('Max')], axis=1)
-df = df.drop(df.columns[df.columns.str.contains('Min')], axis=1)
+# List of columns to keep
+columns_to_keep = [
+    'OBJECTID',
+    'Geographic Identifier',
+    'County Name',
+    'State Geographic Identifier',
+    'State Abbreviation',
+    'State Name',
+    'Mean - Annual total precipitation',
+    'Mean - Daily average temperature',
+    'Mean - Annual single highest maximum temperature',
+    'Mean - Daily minimum temperature',
+    'Mean - Daily maximum temperature'
+]
 
-#dropped columns about number od days with less than 0.01 inches of precipitation
-df = df.drop(df.columns[df.columns.str.contains('0.01')], axis=1)
+# Filter the DataFrame to keep columns that contain any of the specified strings
+columns_to_keep = [col for col in df.columns if any(s in col for s in columns_to_keep)]
+df_filtered = df[columns_to_keep]
 
-# Identify the columns that contain 'building value' or 'agricultural value'
-value_columns = [col for col in df.columns if 'building value' in col or 'agricultural value' in col]
-# Create a new column that sums these columns
-df['Total Expected Annual Loss'] = df[value_columns].sum(axis=1)
+# Drop columns that contain 'RCP 8.5' or 'Late-century'
+df_filtered = df_filtered.loc[:, ~df_filtered.columns.str.contains('RCP 8.5|Late-century|Mid-century')]
 
-#gets rid of rows for Mariana Islands, American Somoa, Virgin Islands, and Guam
-values_to_delete = ['AS', 'GU', 'MP', 'VI']
-# Filter out rows with the specified values in the 'State Abbreviation' column
-df = df[~df['State Abbreviation'].isin(values_to_delete)]
+# Create a new column for change in precipitation
+
+# Create a new column for change in mean daily average temperature
+df_filtered['Change in mean daily average temperature [DegF]'] = df['RCP 4.5 Early-century - Mean - Daily average temperature [degF]'] - df['Historical - Mean - Daily average temperature [degF]']
+
+# Create a new column for change in mean daily maximum temperature
+df_filtered['Change in mean daily maximum temperature [DegF]'] = df['RCP 4.5 Early-century - Mean - Daily maximum temperature [degF]'] - df['Historical - Mean - Daily maximum temperature [degF]']
+
+# Create a new column for change in mean daily minimum temperature
+df_filtered['Change in mean daily minimum temperature [DegF]'] = df['RCP 4.5 Early-century - Mean - Daily minimum temperature [degF]'] - df['Historical - Mean - Daily minimum temperature [degF]']
+
+# Create a new column for change in mean annual single highest maximum temperature
+df_filtered['Change in mean annual single highest maximum temperature'] = df['RCP 4.5 Ealry-century - Mean - Annual single highest maximum temperature [degF]'] - df['Historical - Mean - Annual single highest maximum temperature [degF]']
+
+# Output the DataFrame to a new CSV file
+df_filtered.to_csv(root+'\Data\County\Chronic_Climate_Clean.csv', index=False)
 
 
 #Adds Geographic identifiers to the by_county_clean folder for past a current county
@@ -117,5 +131,4 @@ for filename in os.listdir(destination_folder):
             df.to_csv(file_path, index=False)
         else:
             print(f"Missing required columns in file: {filename}")
-
 print("Files processed and saved in the new folder.")
