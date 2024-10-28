@@ -120,7 +120,6 @@ events_db['Property Damage'] = events_db['Property Damage'].apply(convert_damage
 events_db = events_db[events_db['Year'] >= 2000]
 
 
-
 #### Generate summary stats
 
 # sum direct and indirect deaths and injuries 
@@ -163,6 +162,210 @@ events_summary_GDF = counties.merge(total_summary, left_on='GEOID', right_on='FI
 
 
 ####### MAKE FIGURES ######## 
+
+
+# histograms DEATHS
+
+# filter out events with no deaths
+events_with_deaths = events_db[events_db['Deaths'] > 0]
+events_with_deaths['log_deaths'] = np.log(events_with_deaths['Deaths'])
+
+
+# Get a list of unique years in the filtered dataset
+years = events_with_deaths['Year'].unique()
+
+# Create a dictionary to store the number of events with 0 deaths per year
+zero_death_counts = events_db[events_db['Deaths'] == 0].groupby('Year')['Deaths'].count()
+
+# Set up the size of the figure
+plt.figure(figsize=(15, 15))
+
+# Loop through each year and plot a histogram for events with > 0 deaths
+for i, year in enumerate(sorted(years)):
+    # Filter the data for the current year where deaths > 0
+    yearly_data = events_with_deaths[events_with_deaths['Year'] == year]['Deaths']
+    
+    # Create a subplot for each year (adjust 5x5 grid if there are more or fewer years)
+    plt.subplot(5, 5, i + 1)
+    
+    # Plot the histogram for the number of deaths (x-axis) and number of events (y-axis)
+    n, bins, patches = plt.hist(yearly_data, bins=30, color='skyblue', edgecolor='black')
+    
+    # Add titles and labels
+    plt.title(f"Deaths Distribution in {year}", fontsize=10)
+    plt.xlabel('Deaths', fontsize=8)
+    plt.ylabel('Number of Events', fontsize=8)
+    
+    # Annotate counts above each bar
+    for count, bin_edge in zip(n, bins):
+        if count > 0:  # Only annotate bars with counts
+            plt.text(bin_edge + (bins[1] - bins[0]) / 2, count,  # Position text above the bar
+                     f'{int(count)}', ha='center', va='bottom', fontsize=8)
+
+    # Adjust spacing between subplots
+    plt.tight_layout()
+
+plt.savefig(f'{root}/Figures/Storm Events/death_histograms_by_year.png')  # Save as PNG file
+
+# Show the plot
+plt.show()
+
+
+# Aggregate the death data from all years
+all_years_data = events_with_deaths['Deaths']
+
+# Set up the figure size
+plt.figure(figsize=(10, 6))
+
+# Plot the histogram for deaths across all years
+n, bins, patches = plt.hist(all_years_data, bins=100, color='skyblue', edgecolor='black')
+
+# Add titles and labels
+plt.title('Deaths Distribution Across All Years', fontsize=15)
+plt.xlabel('Deaths', fontsize=12)
+plt.ylabel('Number of Events', fontsize=12)
+
+# Annotate counts above each bar
+for count, bin_edge in zip(n, bins):
+    if count > 0:  # Only annotate bars with counts
+        plt.text(bin_edge + (bins[1] - bins[0]) / 2, count,  # Position text above the bar
+                 f'{int(count)}', ha='center', va='bottom', fontsize=10)
+
+# Show the plot
+plt.tight_layout()
+plt.savefig(f'{root}/Figures/Storm Events/death_histograms_all_years.png')  # Save as PNG file
+plt.show()
+
+
+# Aggregate the death data from all years
+all_years_data = events_with_deaths['log_deaths']
+
+# Set up the figure size
+plt.figure(figsize=(10, 6))
+
+# Plot the histogram for deaths across all years
+n, bins, patches = plt.hist(all_years_data, bins=100, color='skyblue', edgecolor='black')
+
+# Add titles and labels
+plt.title('Deaths Distribution Across All Years', fontsize=15)
+plt.xlabel('Log Deaths', fontsize=12)
+plt.ylabel('Number of Events', fontsize=12)
+
+# Annotate counts above each bar
+for count, bin_edge in zip(n, bins):
+    if count > 0:  # Only annotate bars with counts
+        plt.text(bin_edge + (bins[1] - bins[0]) / 2, count,  # Position text above the bar
+                 f'{int(count)}', ha='center', va='bottom', fontsize=10)
+
+# Show the plot
+plt.tight_layout()
+plt.savefig(f'{root}/Figures/Storm Events/log_death_histograms_all_years.png')  # Save as PNG file
+plt.show()
+
+
+
+
+# histograms property damage
+
+# filter out events with no deaths
+events_with_damage = events_db[events_db['Property Damage'] > 0]
+
+events_with_damage['log_damage'] = np.log(events_with_damage['Property Damage'])
+
+# Get a list of unique years in the filtered dataset
+years = events_with_damage['Year'].unique()
+
+# Create a dictionary to store the number of events with 0 deaths per year
+zero_damage_counts = events_db[events_db['Property Damage'] == 0].groupby('Year')['Property Damage'].count()
+
+# Set up the size of the figure
+plt.figure(figsize=(15, 15))
+
+# Loop through each year and plot a histogram for events with > 0 deaths
+for i, year in enumerate(sorted(years)):
+    # Filter the data for the current year where deaths > 0
+    yearly_data = events_with_damage[events_with_damage['Year'] == year]['Property Damage']
+    
+    # Create a subplot for each year (adjust 5x5 grid if there are more or fewer years)
+    plt.subplot(5, 5, i + 1)
+    
+    # Plot the histogram for the number of deaths (x-axis) and number of events (y-axis)
+    n, bins, patches = plt.hist(yearly_data, bins=30, color='skyblue', edgecolor='black')
+    
+    # Add titles and labels
+    plt.title(f"Damage Distribution in {year}", fontsize=10)
+    plt.xlabel('Damage', fontsize=8)
+    plt.ylabel('Number of Events', fontsize=8)
+    
+    # Annotate counts above each bar
+    for count, bin_edge in zip(n, bins):
+        if count > 0:  # Only annotate bars with counts
+            plt.text(bin_edge + (bins[1] - bins[0]) / 2, count,  # Position text above the bar
+                     f'{int(count)}', ha='center', va='bottom', fontsize=8)
+
+    # Adjust spacing between subplots
+    plt.tight_layout()
+
+plt.savefig(f'{root}/Figures/Storm Events/damage_histograms_by_year.png')  # Save as PNG file
+
+# Show the plot
+plt.show()
+
+
+# Aggregate the death data from all years
+all_years_data = events_with_damage['Property Damage']
+
+# Set up the figure size
+plt.figure(figsize=(10, 6))
+
+# Plot the histogram for deaths across all years
+n, bins, patches = plt.hist(all_years_data, bins=100, color='skyblue', edgecolor='black')
+
+# Add titles and labels
+plt.title('Damage Distribution Across All Years', fontsize=15)
+plt.xlabel('Damage', fontsize=12)
+plt.ylabel('Number of Events', fontsize=12)
+
+# Annotate counts above each bar
+for count, bin_edge in zip(n, bins):
+    if count > 0:  # Only annotate bars with counts
+        plt.text(bin_edge + (bins[1] - bins[0]) / 2, count,  # Position text above the bar
+                 f'{int(count)}', ha='center', va='bottom', fontsize=10)
+
+# Show the plot
+plt.tight_layout()
+plt.savefig(f'{root}/Figures/Storm Events/damage_histograms_all_years.png')  # Save as PNG file
+plt.show()
+
+
+# Aggregate the death data from all years
+all_years_data = events_with_damage['log_damage']
+
+# Set up the figure size
+plt.figure(figsize=(10, 6))
+
+# Plot the histogram for deaths across all years
+n, bins, patches = plt.hist(all_years_data, bins=100, color='skyblue', edgecolor='black')
+
+# Add titles and labels
+plt.title('Damage Distribution Across All Years', fontsize=15)
+plt.xlabel('Log Damage', fontsize=12)
+plt.ylabel('Number of Events', fontsize=12)
+
+
+# Show the plot
+plt.tight_layout()
+plt.savefig(f'{root}/Figures/Storm Events/log_damage_histograms_all_years.png')  # Save as PNG file
+plt.show()
+
+
+
+
+
+event_type_counts = events_db['Event Type'].value_counts()
+
+
+
 
 #### TOTAL DEATHS AND DAMAGES BY COUNTY 
 
@@ -259,6 +462,32 @@ plt.savefig(f'{root}/Figures/Storm Events/damages_all_years_county.png')  # Unco
 
 plt.show()
 
+
+
+
+#### JSUT ONE
+
+# Set up the plot for total property damage
+fig, ax = plt.subplots(1, 1, figsize=(14, 7))
+
+# Map: Total Property Damage per Event by County
+events_summary_GDF.plot(column='damage_per_event', ax=ax, legend=True,
+                        cmap='OrRd',  # Choose a colormap
+                        edgecolor=None,  # Turn off the edge color
+                        missing_kwds={
+                            "color": "lightgrey",  # Color for missing data
+                            "label": "Missing values"
+                        })
+
+ax.set_title('Property Damage per Event by County')
+ax.set_axis_off()  # Turn off the axis
+
+# Adjust layout and show the plot
+plt.tight_layout()
+
+#plt.savefig(f'{root}/Figures/Storm Events/TEST.png')  # Uncomment to save as PNG files
+
+plt.show()
 
 
 
