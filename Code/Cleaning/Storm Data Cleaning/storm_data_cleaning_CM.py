@@ -124,7 +124,7 @@ events_db = events_db[events_db['Year'] >= 2000]
 #### Generate summary stats
 
 # sum direct and indirect deaths and injuries 
-events_db['Deaths'] = events_db['Direct Deaths'] + events_db['Direct Deaths']
+events_db['Deaths'] = events_db['Direct Deaths'] + events_db['Indirect Deaths']  #FK fixed a typo where it just summed direct deaths twice
 events_db['Injuries'] = events_db['Direct Injuries'] + events_db['Indirect Injuries']
 
 # generate summary statistics over whole time period 
