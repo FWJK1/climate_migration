@@ -137,6 +137,24 @@ events_summary = events_db.groupby(['FIPS', 'Year']).agg(
     avg_deaths=('Deaths', 'mean'),
 ).reset_index()
 
+
+events_summary['log_property_damage'] = np.where(
+    events_summary['total_property_damage'] > 0,
+    np.log10(events_summary['total_property_damage']),
+    np.nan
+)
+events_summary['log_injuries'] = np.where(
+    events_summary['total_injuries'] > 0,
+    np.log10(events_summary['total_injuries']),
+    np.nan
+)
+events_summary['log_deaths'] = np.where(
+    events_summary['total_deaths'] > 0,
+    np.log10(events_summary['total_deaths']),
+    np.nan
+)
+
+
 events_summary.to_csv(f"{root}/Data/Storm events/year_county_summary.csv")
 
 
@@ -153,6 +171,8 @@ total_summary['damage_per_event'] = total_summary['total_property_damage'] / tot
 total_summary['injuries_per_event'] = total_summary['total_injuries'] / total_summary['event_count'] 
 total_summary['deaths_per_event'] = total_summary['total_deaths'] / total_summary['event_count'] 
 
+
+
 total_summary.to_csv(f"{root}/Data/Storm events/allperiods_county_summary.csv")
 
 
@@ -168,7 +188,7 @@ events_summary_GDF = counties.merge(total_summary, left_on='GEOID', right_on='FI
 
 # filter out events with no deaths
 events_with_deaths = events_db[events_db['Deaths'] > 0]
-events_with_deaths['log_deaths'] = np.log(events_with_deaths['Deaths'])
+events_with_deaths['log_deaths'] = np.log10(events_with_deaths['Deaths'])
 
 
 # Get a list of unique years in the filtered dataset
@@ -270,7 +290,7 @@ plt.show()
 # filter out events with no deaths
 events_with_damage = events_db[events_db['Property Damage'] > 0]
 
-events_with_damage['log_damage'] = np.log(events_with_damage['Property Damage'])
+events_with_damage['log_damage'] = np.log10(events_with_damage['Property Damage'])
 
 # Get a list of unique years in the filtered dataset
 years = events_with_damage['Year'].unique()
