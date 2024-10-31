@@ -63,8 +63,11 @@ df_filtered['Change in mean daily minimum temperature [DegF]'] = df['RCP 4.5 Ear
 # Create a new column for change in mean annual single highest maximum temperature
 df_filtered['Change in mean annual single highest maximum temperature'] = df['RCP 4.5 Ealry-century - Mean - Annual single highest maximum temperature [degF]'] - df['Historical - Mean - Annual single highest maximum temperature [degF]']
 
+df_filtered = df_filtered.loc[:, ~df_filtered.columns.str.contains('RCP 4.5|Late-century|Mid-century')]
+
 # Output the DataFrame to a new CSV file
 df_filtered.to_csv(root+'\Data\County\Chronic_Climate_Clean.csv', index=False)
+
 
 
 #Adds Geographic identifiers to the by_county_clean folder for past a current county
