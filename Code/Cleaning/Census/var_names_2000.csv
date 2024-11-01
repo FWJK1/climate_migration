@@ -1,0 +1,8 @@
+﻿census_code,variable_name
+P043003,total_male_in_labour_force
+P043007,total_male_unemployed
+P043010,total_female_in_labour_force
+P043014,total_female_unemployed
+P052001,median_household_income_2000
+H063001,median_rent_2000
+H085001,median_house_price_2000
