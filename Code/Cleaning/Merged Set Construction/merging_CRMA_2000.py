@@ -8,9 +8,7 @@ Created on Fri Nov  1 09:25:39 2024
 
 # import packages
 import pandas as pd
-import requests
 import os
-import numpy as np
 
 
 ##### Get WD
@@ -150,12 +148,7 @@ minus_3_long = minus_3_long.dropna()
 minus_5_long = minus_5_long.dropna()
 minus_10_long = minus_10_long.dropna()
 
-columns_to_drop = ['STATE_FIPS', 'COUNTY_FIPS']
 
-from_2000_long = from_2000_long.drop(columns=columns_to_drop)
-minus_3_long = minus_3_long.drop(columns=columns_to_drop)
-minus_5_long = minus_5_long.drop(columns=columns_to_drop)
-minus_10_long = minus_10_long.drop(columns=columns_to_drop)
 
 ###### SAVE FILES
 from_2000_long.to_csv(f"{root}/Data/FINAL_FOR_MODEL/From_2000.csv")
