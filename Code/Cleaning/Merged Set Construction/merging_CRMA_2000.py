@@ -48,7 +48,7 @@ CMRA['STATE_FIPS'] = CMRA['Geographic Identifier'].str[:-3]  # Extract everythin
 CMRA['COUNTY_FIPS'] = CMRA['COUNTY_FIPS'].astype(int)
 CMRA['STATE_FIPS'] = CMRA['STATE_FIPS'].astype(int)
 
-CMRA = CMRA.drop(columns=['Geographic Identifier'])
+CMRA = CMRA.drop(columns=['Geographic Identifier', ])
 
 # Import 2000 census data
 census_2000 = pd.read_csv(f"{root}/Data/Census/2000_summary.csv")
@@ -121,8 +121,14 @@ minus_10_long = pd.concat(minus_10_df, ignore_index=True)
 
 dataframes = [from_2000_long, minus_3_long, minus_5_long, minus_10_long]
 
-# Columns to drop
-columns_to_drop = ['NAME', 'start_year', 'end_year']
+
+## FJK Commented this out because we want this columns to do a time_stratified split, I think
+# # Columns to drop
+columns_to_drop = ['NAME',
+                   
+                    # 'start_year', 
+                    # 'end_year'
+                    ]
 
 from_2000_long = from_2000_long.drop(columns=columns_to_drop)
 minus_3_long = minus_3_long.drop(columns=columns_to_drop)
