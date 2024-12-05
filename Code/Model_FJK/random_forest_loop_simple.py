@@ -38,10 +38,10 @@ root = find_repo_root(os.getcwd())
 
 ##### Import data
 datasets = {
-    'from_2000': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/From_2000.csv", usecols=lambda column: column != 'Unnamed: 0'),
-    # 'minus_3': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/minus_3_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
-    # 'minus_5': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/minus_5_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
-    # 'minus_10': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/minus_10_long.csv", usecols=lambda column: column != 'Unnamed: 0')
+    'from_2000': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Sets/From_2000.csv", usecols=lambda column: column != 'Unnamed: 0'),
+    # 'minus_3': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Sets/minus_3_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
+    # 'minus_5': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Sets/minus_5_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
+    # 'minus_10': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Sets/minus_10_long.csv", usecols=lambda column: column != 'Unnamed: 0')
 }
 
 for key in datasets.keys():

@@ -122,12 +122,10 @@ minus_10_long = pd.concat(minus_10_df, ignore_index=True)
 dataframes = [from_2000_long, minus_3_long, minus_5_long, minus_10_long]
 
 
-## FJK Commented this out because we want this columns to do a time_stratified split, I think
 # # Columns to drop
 columns_to_drop = ['NAME',
-                   
-                    # 'start_year', 
-                    # 'end_year'
+                    'start_year', 
+                    'end_year'
                     ]
 
 from_2000_long = from_2000_long.drop(columns=columns_to_drop)

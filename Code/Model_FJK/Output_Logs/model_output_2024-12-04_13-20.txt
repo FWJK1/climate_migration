@@ -1,0 +1,99 @@
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Outflow_pc at 04_13-21-00 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 5 folds for each of 27 candidates, totalling 135 fits
+----------------------------------------------------------------------------------------------------
+Mean Squared Errors for each parameter combination:
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 2, 'rf__n_estimators': 100}, MSE: 0.0076557320253806006
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 2, 'rf__n_estimators': 200}, MSE: 0.007677859519076744
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 2, 'rf__n_estimators': 500}, MSE: 0.007584126131988124
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 100}, MSE: 0.0077551108189665135
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 200}, MSE: 0.007599913724416733
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 500}, MSE: 0.007540411118453277
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 10, 'rf__n_estimators': 100}, MSE: 0.007710392331912483
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 10, 'rf__n_estimators': 200}, MSE: 0.007680952726780664
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 10, 'rf__n_estimators': 500}, MSE: 0.007636112493561521
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 2, 'rf__n_estimators': 100}, MSE: 0.007805249110065755
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 2, 'rf__n_estimators': 200}, MSE: 0.007797868487923574
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 2, 'rf__n_estimators': 500}, MSE: 0.007693913594211813
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 5, 'rf__n_estimators': 100}, MSE: 0.007747037049712249
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 5, 'rf__n_estimators': 200}, MSE: 0.00768032583164651
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 5, 'rf__n_estimators': 500}, MSE: 0.007637619594215964
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 10, 'rf__n_estimators': 100}, MSE: 0.007815883252304642
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 10, 'rf__n_estimators': 200}, MSE: 0.007702193650685864
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 10, 'rf__n_estimators': 500}, MSE: 0.007694354245681675
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 2, 'rf__n_estimators': 100}, MSE: 0.007834660644539939
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 2, 'rf__n_estimators': 200}, MSE: 0.007846097285144338
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 2, 'rf__n_estimators': 500}, MSE: 0.007768887854577728
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 5, 'rf__n_estimators': 100}, MSE: 0.007794723599827971
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 5, 'rf__n_estimators': 200}, MSE: 0.007883582359029055
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 5, 'rf__n_estimators': 500}, MSE: 0.0077687992988591855
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 10, 'rf__n_estimators': 100}, MSE: 0.007805606603419645
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 10, 'rf__n_estimators': 200}, MSE: 0.007797473968917913
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 10, 'rf__n_estimators': 500}, MSE: 0.007824037133257168
+
+
+----------------------------------------------------------------------------------------------------  
+from_2000: Outflow_pc Best Feature:
+{'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 500} has log-side MSE score :0.00754
+Test Set Scores: 
+    Mean Squared Error (MSE): 0.07551864426857449
+    RMSE on the full dataset: 0.27481
+    R²: 0.5752300165699396
+    MAE : 0.056563281088470446
+RESULTS END at 04_13-29-05 
+
+ 
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Inflow_pc at 04_13-29-05 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 5 folds for each of 27 candidates, totalling 135 fits
+----------------------------------------------------------------------------------------------------
+Mean Squared Errors for each parameter combination:
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 2, 'rf__n_estimators': 100}, MSE: 0.004672292022235546
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 2, 'rf__n_estimators': 200}, MSE: 0.004712936850311254
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 2, 'rf__n_estimators': 500}, MSE: 0.004671339555491864
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 100}, MSE: 0.00471313753740244
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 200}, MSE: 0.004691939693391134
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 500}, MSE: 0.004658108010392628
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 10, 'rf__n_estimators': 100}, MSE: 0.0047295749239797255
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 10, 'rf__n_estimators': 200}, MSE: 0.004682829515640589
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 10, 'rf__n_estimators': 500}, MSE: 0.004670523129393706
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 2, 'rf__n_estimators': 100}, MSE: 0.004745251284633772
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 2, 'rf__n_estimators': 200}, MSE: 0.00470155275072043
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 2, 'rf__n_estimators': 500}, MSE: 0.004705755018369987
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 5, 'rf__n_estimators': 100}, MSE: 0.004794369822270527
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 5, 'rf__n_estimators': 200}, MSE: 0.00466163847401724
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 5, 'rf__n_estimators': 500}, MSE: 0.004689031263921557
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 10, 'rf__n_estimators': 100}, MSE: 0.004723815493891153
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 10, 'rf__n_estimators': 200}, MSE: 0.004693861139172262
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2, 'rf__min_samples_split': 10, 'rf__n_estimators': 500}, MSE: 0.004681679596943925
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 2, 'rf__n_estimators': 100}, MSE: 0.004820671013244954
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 2, 'rf__n_estimators': 200}, MSE: 0.00476099622230409
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 2, 'rf__n_estimators': 500}, MSE: 0.00476718002847154
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 5, 'rf__n_estimators': 100}, MSE: 0.004786971593387602
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 5, 'rf__n_estimators': 200}, MSE: 0.0047901903871630375
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 5, 'rf__n_estimators': 500}, MSE: 0.004774242955930677
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 10, 'rf__n_estimators': 100}, MSE: 0.004821336982182706
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 10, 'rf__n_estimators': 200}, MSE: 0.004754623199540724
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4, 'rf__min_samples_split': 10, 'rf__n_estimators': 500}, MSE: 0.004771175534301214
+
+
+----------------------------------------------------------------------------------------------------  
+from_2000: Inflow_pc Best Feature:
+{'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1, 'rf__min_samples_split': 5, 'rf__n_estimators': 500} has log-side MSE score :0.00466
+Test Set Scores: 
+    Mean Squared Error (MSE): 0.010960908554772946
+    RMSE on the full dataset: 0.10469
+    R²: 0.7348726289267444
+    MAE : 0.03613436745024612
+RESULTS END at 04_13-36-51 
+
+ 
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Net_pc at 04_13-36-51 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 5 folds for each of 27 candidates, totalling 135 fits

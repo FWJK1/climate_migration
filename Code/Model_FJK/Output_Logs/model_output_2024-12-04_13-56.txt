@@ -1,0 +1,81 @@
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Outflow_pc at 04_13-56-41 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 3 folds for each of 3 candidates, totalling 9 fits
+----------------------------------------------------------------------------------------------------
+Mean Squared Errors for each parameter combination:
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1}, MSE: 0.007863836384971457
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2}, MSE: 0.007987966353293857
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4}, MSE: 0.007991649506696315
+----------------------------------------------------------------------------------------------------
+Non-log Best Train MSE (original scale): 0.01786943198544945
+
+
+----------------------------------------------------------------------------------------------------  
+from_2000: Outflow_pc Best Feature:
+{'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1}
+Train Log-side MSE score: 0.00786
+See above for train score
+Test Set Scores: 
+    Mean Squared Error (MSE): 0.07520684919575768
+    RMSE on the full dataset: 0.27424
+    R²: 0.5769837714101742
+    MAE : 0.0569111183323462
+RESULTS END at 04_13-57-13 
+
+ 
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Inflow_pc at 04_13-57-13 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 3 folds for each of 3 candidates, totalling 9 fits
+----------------------------------------------------------------------------------------------------
+Mean Squared Errors for each parameter combination:
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1}, MSE: 0.0047603059330266545
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2}, MSE: 0.004852437869229725
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4}, MSE: 0.004892376064735051
+----------------------------------------------------------------------------------------------------
+Non-log Best Train MSE (original scale): 0.0019131032787843714
+
+
+----------------------------------------------------------------------------------------------------  
+from_2000: Inflow_pc Best Feature:
+{'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1}
+Train Log-side MSE score: 0.00476
+See above for train score
+Test Set Scores: 
+    Mean Squared Error (MSE): 0.010992941509501258
+    RMSE on the full dataset: 0.10485
+    R²: 0.7340978014539682
+    MAE : 0.03589211686743941
+RESULTS END at 04_13-57-42 
+
+ 
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Net_pc at 04_13-57-42 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 3 folds for each of 3 candidates, totalling 9 fits
+----------------------------------------------------------------------------------------------------
+Mean Squared Errors for each parameter combination:
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 1}, MSE: 0.016346375478215606
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 2}, MSE: 0.016232798234754944
+Parameters: {'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4}, MSE: 0.016162781613110622
+----------------------------------------------------------------------------------------------------
+Non-log Best Train MSE (original scale): 0.004355069687053736
+
+
+----------------------------------------------------------------------------------------------------  
+from_2000: Net_pc Best Feature:
+{'rf__max_features': 'sqrt', 'rf__min_samples_leaf': 4}
+Train Log-side MSE score: 0.01616
+See above for train score
+Test Set Scores: 
+    Mean Squared Error (MSE): 0.011961446939010053
+    RMSE on the full dataset: 0.10937
+    R²: 0.25241223390474454
+    MAE : 0.04444506158736178
+RESULTS END at 04_13-58-14 
+
+ 
