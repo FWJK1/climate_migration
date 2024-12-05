@@ -1,0 +1,8 @@
+Model includes from_2000: Outflow_pc,
+Model includes from_2000: Inflow_pc,
+Model includes from_2000: Net_pc,
+---------------------------------------------------------------------------------------------------- 
+---------------------------------------------------------------------------------------------------- 
+Now processing dataset: from_2000, on Outflow_pc at 04_20-55-45 
+Pipeline(steps=[('rf', RandomForestRegressor())])
+Fitting 3 folds for each of 36 candidates, totalling 108 fits

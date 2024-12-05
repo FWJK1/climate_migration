@@ -202,11 +202,9 @@ plt.savefig(f"{root}/Figures/FJK_Agg_Results/importance_heatmap_top10_any.png", 
 ### CLIMATE IMPORTANCE 
 
 # Define the features of interest
-property_features = [f'Total_{i}_property' for i in range(1, 7)]
-death_features = [f'Total_{i}_death' for i in range(1, 7)]
 
 # Combine the lists of features
-features_of_interest = property_features + death_features
+features_of_interest = ['property_damage', 'deaths']
 
 # Filter the importance_results DataFrame to include only the specified features
 importance_results_temp = importance_results.loc[features_of_interest]

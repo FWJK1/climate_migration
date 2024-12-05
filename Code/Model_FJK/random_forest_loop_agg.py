@@ -83,7 +83,7 @@ def forest_reg_search(X, y, param_grid=None, groups=None,  logged=True, **kwargs
 
     if not param_grid:
         param_grid = {
-            "rf__n_estimators": [100, 200, 500, 800],  # Number of trees
+            "rf__n_estimators": [500, 800],  # Number of trees
             "rf__max_depth": [None],  # Max depth of trees
             "rf__min_samples_split": [2, 5, 10],  # Min samples to split a node
             "rf__min_samples_leaf": [1, 2, 4],  # Min samples required at leaf node
@@ -97,7 +97,7 @@ def forest_reg_search(X, y, param_grid=None, groups=None,  logged=True, **kwargs
                        cv=cv_strategy.split(X, y, groups),
                        refit='neg_mean_squared_error',
                        scoring='neg_mean_squared_error', # suggest scoring with mse ... as splitting by train/test makes r2 relationship to variance make less sense
-                       n_jobs=-8,
+                       n_jobs=-2,
                        verbose=3)
     clf.fit(X, y)
 
