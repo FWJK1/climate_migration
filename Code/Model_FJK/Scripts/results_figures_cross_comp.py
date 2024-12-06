@@ -41,10 +41,24 @@ climate_mae = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Climate_Results/mae_
 count_mae = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Results/mae_results.csv", index_col=0)
 
 
+
 agg_mae = agg_mae.apply(pd.to_numeric, errors='coerce')
 binned_mae = binned_mae.apply(pd.to_numeric, errors='coerce')
 climate_mae = climate_mae.apply(pd.to_numeric, errors='coerce')
 count_mae = count_mae.apply(pd.to_numeric, errors='coerce')
+
+agg_baseline_mae_results = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Agg_Results/baseline_mae_results.csv", index_col=0)
+agg_baseline_mae_results = agg_baseline_mae_results.apply(pd.to_numeric, errors='coerce')
+
+count_baseline_mae_results = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Results/baseline_mae_results.csv", index_col=0)
+count_baseline_mae_results = count_baseline_mae_results.apply(pd.to_numeric, errors='coerce')
+
+binned_baseline_mae_results = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Binned_Results/baseline_mae_results.csv", index_col=0)
+binned_baseline_mae_results = binned_baseline_mae_results.apply(pd.to_numeric, errors='coerce')
+
+climate_baseline_mae_results = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Climate_Results/baseline_mae_results.csv", index_col=0)
+climate_baseline_mae_results = climate_baseline_mae_results.apply(pd.to_numeric, errors='coerce')
+
 
 timeperiod = 'from_2000'
 
@@ -52,6 +66,8 @@ agg_filtered = agg_mae.loc[timeperiod]
 binned_filtered = binned_mae.loc[timeperiod]
 climate_filtered = climate_mae.loc[timeperiod]
 count_filtered = count_mae.loc[timeperiod]
+
+
 
 # Combine these rows into a new DataFrame
 combined_df = pd.DataFrame({
@@ -62,6 +78,23 @@ combined_df = pd.DataFrame({
 })
 
 combined_df = combined_df.T
+
+
+
+agg_basefiltered = agg_baseline_mae_results.loc[timeperiod]
+binned_basefiltered = count_baseline_mae_results.loc[timeperiod]
+climate_basefiltered = binned_baseline_mae_results.loc[timeperiod]
+count_basefiltered = climate_baseline_mae_results.loc[timeperiod]
+
+# Combine these rows into a new DataFrame
+combined_base_df = pd.DataFrame({
+    'Aggregate': agg_basefiltered,
+    'Binned': binned_basefiltered,
+    'Climate Only': climate_basefiltered,
+    'Count': count_basefiltered
+})
+
+combined_base_df = combined_base_df.T
 
 
 ##### PLOTS
@@ -80,8 +113,12 @@ plt.title("MAE Heatmap for Model Paradigm and Response Variables")
 
 plt.savefig(f"{root}/Figures/CM_figs/MAE_heatmap.png", dpi=300, bbox_inches='tight') 
 
-
-
+### MAE baselineComparison HEATMAP
+percentage_diff_df = ((combined_base_df - combined_df) / combined_base_df) * 100
+plt.figure(figsize=(10, 6))
+sns.heatmap(percentage_diff_df, annot=True, cmap="coolwarm", center=0, fmt=".3f")
+plt.title(f'Percentage Improvement MAE Heatmap for Model Paradigm and Response Variables')
+plt.savefig(f"{root}/Figures/CM_figs/MAE_differential_heatplot.png", dpi=300, bbox_inches='tight')
 
 
 
