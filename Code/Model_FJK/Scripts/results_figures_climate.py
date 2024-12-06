@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
+paradigm = "Climate"
 
 ##### Get WD
  
@@ -62,7 +63,7 @@ sns.heatmap(mae_results, annot=True, cmap="YlOrRd", cbar_kws={'label': 'MAE'}, f
 # Set plot labels and title
 plt.xlabel("Response Variable")
 plt.ylabel("Dataset")
-plt.title("MAE Heatmap for Datasets and Response Variables")
+plt.title(f"{paradigm} Model:MAE Heatmap for Datasets and Response Variables")
 
 plt.savefig(f"{root}/Figures/FJK_Climate_Results/MAE_heatmap.png", dpi=300, bbox_inches='tight') 
 
@@ -77,7 +78,7 @@ sns.heatmap(mae_results, annot=True, cmap="YlOrRd", cbar_kws={'label': 'MAE'}, f
 # Set plot labels and title
 plt.xlabel("Response Variable")
 plt.ylabel("Dataset")
-plt.title("MSE Heatmap for Datasets and Response Variables")
+plt.title(f"{paradigm} Model:MSE Heatmap for Datasets and Response Variables")
 
 plt.savefig(f"{root}/Figures/FJK_Climate_Results/MSE_heatmap.png", dpi=300, bbox_inches='tight') 
 
@@ -93,7 +94,7 @@ sns.heatmap(rmse_results, annot=True, cmap="YlOrRd", cbar_kws={'label': 'MAE'}, 
 # Set plot labels and title
 plt.xlabel("Response Variable")
 plt.ylabel("Dataset")
-plt.title("RMSE Heatmap for Datasets and Response Variables")
+plt.title(f"{paradigm} Model:RMSE Heatmap for Datasets and Response Variables")
 
 plt.savefig(f"{root}/Figures/FJK_Climate_Results/RMSE_heatmap.png", dpi=300, bbox_inches='tight') 
 
@@ -111,7 +112,7 @@ sns.heatmap(r2_results, annot=True, cmap="RdYlGn", cbar_kws={'label': 'R²'}, fm
 # Set plot labels and title
 plt.xlabel("Response Variable")
 plt.ylabel("Dataset")
-plt.title("R² Heatmap for Datasets and Response Variables")
+plt.title(f"{paradigm} Model:R² Heatmap for Datasets and Response Variables")
 
 plt.savefig(f"{root}/Figures/FJK_Climate_Results/R2_heatmap.png", dpi=300, bbox_inches='tight') 
 
@@ -132,7 +133,7 @@ plt.figure(figsize=(12, 8))  # Adjust figure size as needed
 sns.heatmap(importance_results_sorted, annot=True, cmap="Blues", cbar_kws={'label': 'Mean Importance'}, fmt=".3f")
 
 # Set plot title and labels
-plt.title("Mean Feature Importance Heatmap (Ordered by Average Importance)")
+plt.title(f"{paradigm} Model:Mean Feature Importance Heatmap (Ordered by Average Importance)")
 plt.xlabel("Response Variable")
 plt.ylabel("Predictor")
 
@@ -157,7 +158,7 @@ plt.figure(figsize=(12, 8))  # Adjust figure size as needed
 sns.heatmap(filtered_importance_results, annot=True, cmap="Blues", cbar_kws={'label': 'Mean Importance'}, fmt=".3f")
 
 # Set plot title and labels
-plt.title("Mean Feature Importance Heatmap (Top 20 Features)")
+plt.title(f"{paradigm} Model:Mean Feature Importance Heatmap (Top 20 Features)")
 plt.xlabel("Response Variable")
 plt.ylabel("Predictor")
 
@@ -187,7 +188,7 @@ plt.figure(figsize=(12, 8))  # Adjust figure size as needed
 sns.heatmap(importance_results_sorted, annot=True, cmap="Blues", cbar_kws={'label': 'Mean Importance'}, fmt=".3f")
 
 # Set plot title and labels
-plt.title("Mean Feature Importance Heatmap (Top 10 Features in Any Column)")
+plt.title(f"{paradigm} Model:Mean Feature Importance Heatmap (Top 10 Features in Any Column)")
 plt.xlabel("Response Variable")
 plt.ylabel("Predictor")
 
@@ -220,7 +221,7 @@ plt.figure(figsize=(12, 8))  # Adjust figure size as needed
 sns.heatmap(importance_results_sorted, annot=True, cmap="Blues", cbar_kws={'label': 'Mean Importance'}, fmt=".3f")
 
 # Set plot title and labels
-plt.title("Mean Feature Importance Heatmap for Total Properties and Deaths (Ordered by Average Importance)")
+plt.title(f"{paradigm} Model:Mean Feature Importance Heatmap for Total Properties and Deaths (Ordered by Average Importance)")
 plt.xlabel("Response Variable")
 plt.ylabel("Predictor")
 
@@ -244,7 +245,7 @@ mae_long.rename(columns={'index': 'Dataset'}, inplace=True)
 
 plt.figure(figsize=(10, 6))
 sns.barplot(data=mae_long, x='Dataset', y='MAE', hue='Response Variable')
-plt.title("MAE Comparison Across Datasets and Response Variables")
+plt.title(f"{paradigm} Model:MAE Comparison Across Datasets and Response Variables")
 plt.ylabel("Mean Absolute Error")
 plt.savefig(f"{root}/Figures/FJK_Climate_Results/MSE_bar.png", dpi=300, bbox_inches='tight')
  
@@ -259,7 +260,7 @@ importance_long.columns = ['Predictor', 'Dataset_Response', 'Importance']
 plt.figure(figsize=(12, 6))
 sns.boxplot(data=importance_long, x='Predictor', y='Importance')
 plt.xticks(rotation=90)
-plt.title("Distribution of Feature Importances Across Datasets and Response Variables")
+plt.title(f"{paradigm} Model:Distribution of Feature Importances Across Datasets and Response Variables")
 plt.savefig(f"{root}/Figures/FJK_Climate_Results/feature_boxplot.png", dpi=300, bbox_inches='tight')
 
  
@@ -279,7 +280,7 @@ plt.figure(figsize=(10, 6))
 sns.scatterplot(data=performance_df, x='MAE', y='R2', hue='Response Variable', style='Response Variable', s=100)
 
 # Set plot title and labels
-plt.title("Scatter Plot of MAE vs R² Across Datasets and Response Variables")
+plt.title(f"{paradigm} Model:Scatter Plot of MAE vs R² Across Datasets and Response Variables")
 plt.xlabel("Mean Absolute Error (MAE)")
 plt.ylabel("R² Value")
 plt.legend(title='Response Variable')
@@ -290,10 +291,11 @@ plt.savefig(f"{root}/Figures/FJK_Climate_Results/MAE_R2_scatterplot.png", dpi=30
 # Display the plot
  
 paradigm = "Climate"
+
 baseline_mae_results = pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_{paradigm}_Results/baseline_mae_results.csv", index_col=0)
 baseline_mae_results = baseline_mae_results.apply(pd.to_numeric, errors='coerce')
 percentage_diff_df = ((baseline_mae_results - mae_results) / baseline_mae_results) * 100
 plt.figure(figsize=(10, 6))
-sns.heatmap(percentage_diff_df, annot=True, cmap="coolwarm", center=0, fmt=".5f")
-plt.title('Percentage Improvement from Baseline (Median) to Model MAE')
+sns.heatmap(percentage_diff_df, annot=True, cmap="coolwarm", center=0, fmt=".3f")
+plt.title(f'Percentage Improvement from Baseline (Median) to {paradigm} Model MAE')
 plt.savefig(f"{root}/Figures/FJK_{paradigm}_Results/MAE_differential_heatplot.png", dpi=300, bbox_inches='tight')

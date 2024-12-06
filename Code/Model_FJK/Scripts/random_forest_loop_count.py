@@ -14,6 +14,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_absolute_error, r2_score
 import os
 import numpy as np
+from datetime import datetime
+import sys
 
 ##### Get WD
  
@@ -39,11 +41,10 @@ root = find_repo_root(os.getcwd())
 
 
 
-import sys
-import datetime
 
 # Get current date and time in the format YYYY-MM-DD_HH-MM
-current_time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M')
+current_time = datetime.now().strftime('%m.%d at %H.%M.%S')
+
 
 # Create the output filename with date and time
 output_file = f'{root}/Code/Model_FJK/Output_Logs/count_model_output_{current_time}.txt'
@@ -138,7 +139,7 @@ def fjk_log(data):
 datasets = {
     'from_2000': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Sets/From_2000.csv", usecols=lambda column: column != 'Unnamed: 0'),
     'minus_3': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Sets/minus_3_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
-    'minus_5': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Sets/minus_5_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
+    # 'minus_5': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Sets/minus_5_long.csv", usecols=lambda column: column != 'Unnamed: 0'),
     'minus_10': pd.read_csv(f"{root}/Data/FINAL_FOR_MODEL/FJK_Count_Sets/minus_10_long.csv", usecols=lambda column: column != 'Unnamed: 0')
 }
 
@@ -148,7 +149,7 @@ for key in datasets.keys():
 
 from_2000_full = datasets['from_2000']
 minus_3_full = datasets['minus_3']
-minus_5_full = datasets['minus_5']
+# minus_5_full = datasets['minus_5']
 minus_10_full = datasets['minus_10']
 
 response_variables = [
@@ -192,7 +193,7 @@ for dataset_name, data in datasets.items():
     test_data = df.iloc[test_index]
 
     for response_col in response_variables:
-        current_time = datetime.datetime.now().strftime('%d_%H-%M-%S')
+        current_time = datetime.now().strftime('%m.%d at %H:%M:%S')
         print(f"{'--' *50} \n{'--' *50} \nNow processing dataset: {dataset_name}, on {response_col} at {current_time} ")
 
         # Calculate the 1st and 99th percentiles for y_train and y_test
@@ -223,8 +224,10 @@ for dataset_name, data in datasets.items():
 
 
         ## Remove outliers and make it logarithmic
-        y_train = fjk_log(y_train)
-        y_test = fjk_log(y_test)
+        # print("log transforming")
+        # y_train = fjk_log(y_train)
+        # y_test = fjk_log(y_test)
+
 
 
 
@@ -239,8 +242,8 @@ for dataset_name, data in datasets.items():
 
         
         y_pred = best_model.predict(X_test)
-        y_pred = np.expm1(y_pred)
-        y_test = np.expm1(y_test)
+        # y_pred = np.expm1(y_pred)
+        # y_test = np.expm1(y_test)
         
         
    # Calculate regression metrics
@@ -253,7 +256,7 @@ for dataset_name, data in datasets.items():
         baseline_pred_median = np.full_like(y_test, np.median(y_test))
         baseline_mae = mean_absolute_error(y_test, baseline_pred_median)
 
-        current_time = datetime.datetime.now().strftime('%d_%H-%M-%S')
+        current_time = datetime.now().strftime('%m.%d at %H:%M:%S')
         
 
         print(f"Test Set Scores: ")
