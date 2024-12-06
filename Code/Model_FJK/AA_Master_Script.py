@@ -4,10 +4,10 @@ import subprocess
 # List of Python scripts to run
 scripts = [
 
-    "Code/Model_FJK/Scripts/random_forest_loop_agg.py",
-    "Code/Model_FJK/Scripts/random_forest_loop_binned.py",
-    "Code/Model_FJK/Scripts/random_forest_loop_count.py",
-    "Code/Model_FJK/Scripts/random_forest_loop_climate.py",
+    # "Code/Model_FJK/Scripts/random_forest_loop_agg.py",
+    # "Code/Model_FJK/Scripts/random_forest_loop_binned.py",
+    # "Code/Model_FJK/Scripts/random_forest_loop_count.py",
+    # "Code/Model_FJK/Scripts/random_forest_loop_climate.py",
 
     "Code/Model_FJK/Scripts/results_figures_agg.py",
     "Code/Model_FJK/Scripts/results_figures_binned.py",
